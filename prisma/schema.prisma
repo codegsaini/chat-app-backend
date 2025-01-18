@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @unique @default(cuid())
+  name      String
+  email     String
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Chat {
+    id         String   @id @unique @default(cuid())
+    receiverId String
+    senderId   String
+    ticketId   String
+    message    String
+    createdAt  DateTime @default(now())
+}
+
+model Ticket {
+    id        String   @id @unique @default(cuid())
+    userId    String
+    orgId     String
+    resolved  Boolean? @default(false)
+    page      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
