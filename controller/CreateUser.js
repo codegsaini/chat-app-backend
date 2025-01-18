@@ -17,14 +17,12 @@ export const createUser = async (req, res, next) => {
                 phone: phone
             }
         });
-        const response = await fetch(pageTitle);
-        const body = await response.text();
-        const title = parseTitle(body);
+        
         const ticket = await prisma.ticket.create({
             data: {
                 userId: user.id,
                 orgId: "org1",
-                page: title,
+                page: pageTitle,
                 resolved: false
             }
         })
